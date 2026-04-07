@@ -23,7 +23,7 @@ RAG-powered chatbot over the ASPICE PAM 4.0 standard — a 135-page highly techn
 ### 1. Domain-specific chunking over generic loaders
 ASPICE PAM 4.0 contains three distinct table structures across Chapters 3, 4, and 5. LangChain's generic PDF loader flattens these into unstructured text, losing the relationship between processes, base practices, and work products. A custom `pdfplumber`-based extractor was built to parse each table type into a unified schema (`chunk_id`, `source`, `type`, `title`, `text`), producing ~44 semantically coherent chunks validated via PCA — embeddings cluster by process area, confirming domain structure is preserved.
 
-![PCA](assets/pca.png)
+![PCA](assets/aspice_pca.png)
 
 ### 2. Hybrid retrieval with process ID routing
 Dense search alone misses exact process ID matches (e.g. `SWE.3`, `MAN.6`). BM25 alone lacks semantic understanding. RRF fusion combines both. A regex-based process ID router force-inserts the exact matching chunk at rank 1 when a process ID is detected in the query — a deliberate, lightweight gate that outperforms a generalised reranker for this use case.
