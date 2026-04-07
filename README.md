@@ -2,13 +2,17 @@
 
 RAG-powered chatbot over the ASPICE PAM 4.0 standard — a 135-page highly technical document used by automotive manufacturers including BMW, Audi, and other global OEMs to certify software and hardware compliance. Automotive engineers use this chatbot to query process requirements, work products, and base practices in natural language — instead of manually navigating dense, compact documentation. ASPICE compliance is mandatory for any software or hardware component entering a modern vehicle. Making this knowledge accessible directly improves the quality of engineering work products.
 
-> **Live demo available on request.** Contact: [LinkedInProfile](https://www.linkedin.com/in/subodh-kurkute-0025a3129/)
-
 ---
 
 ## Demo
 
-![Demo](assets/demo.gif)
+> ☁️ Deployed on AWS EC2 · 🐳 Containerised with Docker · Live demo available on request. Contact: [LinkedInProfile](https://www.linkedin.com/in/subodh-kurkute-0025a3129/) 
+<p align="center">
+  <img src="assets/demo.gif" width="800"/>
+  <br>
+  <em> Demo — querying ASPICE queries via Streamlit UI.</em></em>
+</p>
+
 
 ---
 
@@ -56,7 +60,7 @@ At runtime, all compute is local except the Groq API call for generation. Embedd
 ### Prerequisites
 - Python 3.11+
 - Groq API key → get it at [console.groq.com](https://console.groq.com)
-- ASPICE PAM 4.0 PDF → download from [automotivespice.com](https://automotivespice.com). Place it in: `data/raw/`
+- Automotive SPICE&reg; 4.0 PDF → download from [https://vda-qmc.de](https://vda-qmc.de/wp-content/uploads/2023/12/Automotive-SPICE-PAM-v40.pdf). Place it in: `data/raw/`
 
 ### Installation
 ```bash
@@ -87,14 +91,20 @@ python -m tests.test_hybrid_retriever     # run retrieval unit tests
 
 ## Evaluation
 
-RAGAS evaluation script: `eval/ragas_eval.py`
+Evaluated using [RAGAS](https://docs.ragas.io/) on 6 manually crafted questions covering 
+process lookups, base practices, capability levels, and out-of-scope queries.
 
-| Metric             | Score |
-|--------------------|-------|
-| Context Precision  | TBD   |
-| Context Recall     | TBD   |
-| Faithfulness       | TBD   |
+| Metric            | Score |
+|-------------------|-------|
+| Faithfulness      | 0.97  |
+| Context Precision | 0.90  |
+| Context Recall    | 0.80  |
 
+Full evaluation script and results: `eval/ragas_eval.py`, `eval/aspice_eval.json`
+
+**Notes:**
+- Out-of-scope query ("capital of France") correctly returned "Not found in context" ✅
+- Context Recall gap traced to PA 2.1 chunk — a known retrieval limitation documented in roadmap
 ---
 
 ## Limitations & Roadmap
