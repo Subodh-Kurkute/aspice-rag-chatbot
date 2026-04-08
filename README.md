@@ -2,7 +2,11 @@
 
 RAG-powered chatbot over the ASPICE PAM 4.0 standard — a 135-page highly technical document used by automotive manufacturers including BMW, Audi, and other global OEMs to certify software and hardware compliance. Automotive engineers use this chatbot to query process requirements, work products, and base practices in natural language — instead of manually navigating dense, compact documentation. ASPICE compliance is mandatory for any software or hardware component entering a modern vehicle. Making this knowledge accessible directly improves the quality of engineering work products.
 
----
+> **Disclaimer:** This project is built solely to support the performance of 
+> process assessments and is not offered for sale, in accordance with the 
+> VDA QMC derivative works policy. The ASPICE PAM 4.0 document is not 
+> distributed with this repository. Users must download it directly from 
+> from the website (mentioned in section 'Quickstart'). No commercial use intended. 
 
 ## Demo
 
@@ -62,6 +66,9 @@ At runtime, all compute is local except the Groq API call for generation. Embedd
 - Groq API key → get it at [console.groq.com](https://console.groq.com)
 - Automotive SPICE&reg; 4.0 PDF → download from [https://vda-qmc.de](https://vda-qmc.de/wp-content/uploads/2023/12/Automotive-SPICE-PAM-v40.pdf). Place it in: `data/raw/`
 
+> **Why download the PDF yourself?** : The ASPICE PAM 4.0 document is 
+> copyrighted by VDA QMC and cannot be redistributed.
+
 ### Installation
 ```bash
 git clone <repo>
@@ -74,12 +81,19 @@ pip install -r requirements.txt
 python setup.py        # extracts, chunks, embeds, stores
 streamlit run app.py   # launches UI
 ```
+> **Note:** `setup.py` includes automated validation gates that run during 
+> pipeline setup. These verify extraction, chunking, and embedding quality 
+> before storing to ChromaDB. No separate test runner required.
+
 
 ### Option B: Run with Docker
 ```bash
 docker build -t rag_aspice .
 docker run -p 8501:8501 -e GROQ_API_KEY=your_key_here rag_aspice
 ```
+> **CI/CD:** Automated deployment is not configured in this repository. 
+> The ASPICE PDF is not included due to copyright restrictions, making 
+> automated pipeline execution on remote runners not feasible.
 
 ### Optional
 ```bash
