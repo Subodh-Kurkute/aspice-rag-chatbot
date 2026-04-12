@@ -1,4 +1,4 @@
-# RAG_ASPICE
+# ASPICE RAG Chatbot — AI-Powered Process Assessment Assistant
 
 RAG-powered chatbot over the ASPICE PAM 4.0 standard — a 135-page highly technical document used by automotive manufacturers including BMW, Audi, and other global OEMs to certify software and hardware compliance. Automotive engineers use this chatbot to query process requirements, work products, and base practices in natural language — instead of manually navigating dense, compact documentation. ASPICE compliance is mandatory for any software or hardware component entering a modern vehicle. Making this knowledge accessible directly improves the quality of engineering work products.
 
@@ -58,10 +58,35 @@ No cloud vector store. ChromaDB runs as a persistent local client. No data leave
 At runtime, all compute is local except the Groq API call for generation. Embeddings use `nomic-embed-text-v1.5` via sentence-transformers — fully offline. ChromaDB is local. The only external dependency is Groq. Roadmap: replace Groq with Ollama `llama3.1:8b` (locally runnable on 32GB RAM with optimised chunk size) to achieve full data sovereignty.
 
 ---
+## Project Structure
 
+```
+RAG_ASPICE/
+├── app/          # Streamlit UI
+├── data/         # Raw, processed, vectorstore, outputs
+├── eval/         # RAGAS Evaluation scripts and results
+├── scripts/      # Ingestion and embedding scripts
+├── src/          # Core modules (ingestion, retrieval, generation)
+├── tests/        # Unit tests
+├── config.py     # Configuration
+├── pipeline.py   # Main pipeline
+├── setup.py      # One-time setup for data ingestion
+├── .env          # Paste your API-Keys here
+├── requirements.txt  
+└── Dockerfile
+
+```
+---
 ## Quickstart
 
-### Prerequisites
+### 1. Installation
+```bash
+git clone https://github.com/Subodh-Kurkute/aspice-rag-chatbot.git
+cd RAG_ASPICE
+pip install -r requirements.txt
+```
+
+### 2. Prerequisites
 - Store the API Keys in `.env` file
   - Groq API key → get it at [console.groq.com](https://console.groq.com)
   - HF API key → get it at [huggingface.co](https://huggingface.co/)
@@ -70,13 +95,8 @@ At runtime, all compute is local except the Groq API call for generation. Embedd
 > **Why download the PDF yourself?** : The ASPICE PAM 4.0 document is 
 > copyrighted by VDA QMC and cannot be redistributed.
 
-### Installation
-```bash
-git clone <repo>
-cd RAG_ASPICE
-pip install -r requirements.txt
-```
-### Option A: Run locally
+
+### 3. Option A: Run locally
 ```bash
 
 python setup.py        # extracts, chunks, embeds, stores
@@ -87,20 +107,21 @@ streamlit run app.py   # launches UI
 > before storing to ChromaDB. No separate test runner required.
 
 
-### Option B: Run with Docker
+### 3. Option B: Run with Docker
 ```bash
 docker build -t rag_aspice .
 docker run -p 8501:8501 --env-file .env rag_aspice
 ```
-> **CI/CD:** Automated deployment is not configured in this repository. 
-> The ASPICE PDF is not included due to copyright restrictions, making 
-> automated pipeline execution on remote runners not feasible.
 
-### Optional
+### 4. Extras & Testing
 ```bash
 python pipeline.py                        # terminal-based query explorer
 python -m tests.test_hybrid_retriever     # run retrieval unit tests
 ```
+> **Note: CI/CD** Automated deployment is not configured in this repository. 
+> The ASPICE PDF is not included due to copyright restrictions, making 
+> automated pipeline execution on remote runners not feasible.
+
 
 ---
 
@@ -126,14 +147,14 @@ Full evaluation script and results: `eval/ragas_eval.py`, `eval/aspice_eval.json
 
 ### Current limitations
 1. **Single external dependency**: Groq API is the only non-local component. User data (queries) leave the machine at generation time.
-2. **Abstract queries**: The system handles concrete process lookups well. Abstract or comparative queries ("which process is most critical?") are outside current scope. Query transformation techniques (e.g. step-back prompting) could address this.
+2. **Abstract queries**: The system handles concrete process lookups well. Abstract or comparative queries ("which process is most critical?") are outside current scope. Query transformation techniques (HyDE) could address this.
 3. **Single-turn only**: No conversational memory. Each query is independent.
 
 ### Roadmap: Full local deployment (GDPR compliant)
 The architecture is designed with local inference in mind. Two viable paths:
 
 - **Option A — Optimise chunk size**: Smaller chunks → fewer tokens per query → compatible with `llama3.1:8b` via Ollama. Tradeoff: retrieval logic becomes more complex, noise probability increases.
-- **Option B — Self-host current setup**: Run `llama3.1:8b` locally on 32GB RAM. Removes Groq dependency entirely. Tradeoff: ~10-15 tokens/second on CPU — acceptable for internal tooling, not for a live demo.
+- **Option B — Self-host current setup**: Run `llama3.1:8b` locally on 32GB RAM. Removes Groq dependency entirely. Tradeoff: ~10-15 tokens/second on CPU — acceptable for internal tooling, not ideal for a live demo.
 
 ---
 
