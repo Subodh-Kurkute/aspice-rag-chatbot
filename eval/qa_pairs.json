@@ -1,0 +1,26 @@
+[
+    {   
+        "question": "what is Process Reference Model in Automotive SPICE?",
+        "ground_truth": "In Automotive SPICE, the Process Reference Model is the process dimension of the framework. It provides the set of processes and, for each process, its process purpose and process outcomes. The PAM then adds indicators on top of the PRM for assessment."
+    },
+    {
+        "question": "What Generic practices need to be implemented for PA 2.1-Process performance management?",
+        "ground_truth": "GP 2.1.1 Identify the objectives and define a strategy for the performance of the process. GP 2.1.2 Plan the performance of the process. GP 2.1.3 Determine resource needs. GP 2.1.4 Identify and make available resources. GP 2.1.5 Monitor and adjust the performance of the process. GP 2.1.6 Manage the interfaces between involved parties."
+    },
+    {
+        "question": "what is the capital of france?",
+        "ground_truth": "This question is not related to ASPICE document. LLM shall answer 'Not found in context'"
+    },   
+    {
+        "question": "What are the base practices of SWE.1?",
+        "ground_truth": "SWE.1 Software Requirements Analysis base practices are: BP1 Specify software requirements, BP2 Structure software requirements, BP3 Analyze software requirements, BP4 Analyze the impact on the operating environment, BP5 Ensure consistency and establish bidirectional traceability, BP6 Communicate agreed software requirements and impact on the operating environment."
+    },
+    {
+        "question": "Why is project management process MAN.3 needed?",
+        "ground_truth": "The purpose is to identify and control the activities, and establish resources necessary for a project to develop a product, in the context of the project’s requirements and constraints."
+    },
+    {
+        "question": "what are the guidelines for Software architecture?",
+        "ground_truth": "SWE.2 Software Architectural Design base practices are: BP1 Specify static aspects of the software architecture, BP2 Specify dynamic aspects of the software architecture, BP3 Analyze software architecture, BP4 Ensure consistency and establish bidirectional traceability, BP5 Communicate agreed software architecture."
+    }        
+]
