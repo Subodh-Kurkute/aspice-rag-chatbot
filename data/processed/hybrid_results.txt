@@ -1,0 +1,42 @@
+
+=== What are the base practices of SWE.6? ===
+chunk_id                          title     type  rrf_score
+   SWE.6          Software Verification  process   0.008197
+   SWE.1 Software Requirements Analysis  process   0.008333
+   3.3_1       Process assessment model overview   0.008333
+
+=== BPs of SWE.6 ===
+chunk_id                          title     type  rrf_score
+   SWE.6          Software Verification  process   0.016261
+   SWE.1 Software Requirements Analysis  process   0.008333
+     3.1        Process reference model overview   0.008333
+
+=== software unit verification ===
+chunk_id                                                        title    type  rrf_score
+   SWE.4                                   Software Unit Verification process   0.016667
+   SWE.5 Software Component Verification and Integration Verification process   0.008197
+   SWE.3               Software Detailed Design and Unit Construction process   0.008197
+
+=== corrective action document ===
+chunk_id                      title    type  rrf_score
+   SWE.4 Software Unit Verification process   0.008333
+   MAN.5            Risk Management process   0.008333
+  SUP.10  Change Request Management process   0.008197
+
+=== what is Process Reference Model ===
+chunk_id                    title     type  rrf_score
+     3.1  Process reference model overview   0.016530
+   3.3_0 Process assessment model overview   0.016530
+   PIM.3      Process Improvement  process   0.008065
+
+=== SWE.2 output work products ===
+chunk_id                                          title     type  rrf_score
+   SWE.2                  Software Architectural Design  process   0.000000
+   SWE.3 Software Detailed Design and Unit Construction  process   0.008333
+     3.1                        Process reference model overview   0.008333
+
+=== Generic practices level 2 ===
+chunk_id                                          title  type  rrf_score
+     5.3    Process capability Level 2: Managed process annex   0.000000
+     5.0                         Chapter 5 Introduction annex   0.016530
+     5.6 Process capability Level 5: Innovating process annex   0.008333
