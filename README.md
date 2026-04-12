@@ -62,8 +62,9 @@ At runtime, all compute is local except the Groq API call for generation. Embedd
 ## Quickstart
 
 ### Prerequisites
-- Python 3.11+
-- Groq API key → get it at [console.groq.com](https://console.groq.com)
+- Store the API Keys in `.env` file
+  - Groq API key → get it at [console.groq.com](https://console.groq.com)
+  - HF API key → get it at [huggingface.co](https://huggingface.co/)
 - Automotive SPICE&reg; 4.0 PDF → download from [https://vda-qmc.de](https://vda-qmc.de/wp-content/uploads/2023/12/Automotive-SPICE-PAM-v40.pdf). Place it in: `data/raw/`
 
 > **Why download the PDF yourself?** : The ASPICE PAM 4.0 document is 
@@ -89,7 +90,7 @@ streamlit run app.py   # launches UI
 ### Option B: Run with Docker
 ```bash
 docker build -t rag_aspice .
-docker run -p 8501:8501 -e GROQ_API_KEY=your_key_here rag_aspice
+docker run -p 8501:8501 --env-file .env rag_aspice
 ```
 > **CI/CD:** Automated deployment is not configured in this repository. 
 > The ASPICE PDF is not included due to copyright restrictions, making 
